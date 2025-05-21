@@ -1,0 +1,609 @@
+{
+	"info": {
+		"_postman_id": "bb355886-a0a0-41bc-b3a4-a3aeb9055273",
+		"name": "DS-A2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34603567"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "admin register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"admin\",\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"admin\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authentication-1.0-SNAPSHOT/api/api/register-admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authentication-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"register-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authentication-1.0-SNAPSHOT/api/api/admin-login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authentication-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"admin-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create seller",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"sellerABC\",\r\n  \"email\": \"seller@example.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authentication-1.0-SNAPSHOT/api/api/create-seller",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authentication-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"create-seller"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test admin api",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/authentication-1.0-SNAPSHOT/api/api/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authentication-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "seller",
+			"item": [
+				{
+					"name": "test seller api",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "seller login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"sellerABCD\",\r\n  \"password\": \"C1htBwGaqj\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list seller dishes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/dishes?sellerId=681faef0810af740461ac040",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "sellerId",
+									"value": "681faef0810af740461ac040"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add dish",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sellerId\": \"681faef0810af740461ac040\",\r\n  \"name\": \"Dish1\",\r\n  \"price\":  10.5,\r\n  \"quantity\": 10\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/dishes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"dishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update dish",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sellerId\": \"681fad5a810af740461ac03f\",\r\n  \"name\": \"updated-seller2-dish\",\r\n  \"price\": 18.0,\r\n  \"quantity\": 10\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/dishes/681faef0810af740461ac040",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"dishes",
+								"681faef0810af740461ac040"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get past order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/orders/history?sellerId=681fad5a810af740461ac03f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"orders",
+								"history"
+							],
+							"query": [
+								{
+									"key": "sellerId",
+									"value": "681fad5a810af740461ac03f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "process order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\": \"60b8f5c2c209d8d27c76722f\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/process-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"process-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list all dishes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/dishes/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"dishes",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check dish stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/dish/available?dishId=681faef0a3698030c4a0792e&qty=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"dish",
+								"available"
+							],
+							"query": [
+								{
+									"key": "dishId",
+									"value": "681faef0a3698030c4a0792e"
+								},
+								{
+									"key": "qty",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get seller order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller/orders/all?sellerId=681fad5a810af740461ac03f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"seller-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"seller",
+								"orders",
+								"all"
+							],
+							"query": [
+								{
+									"key": "sellerId",
+									"value": "681fad5a810af740461ac03f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "test customer api",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8280/customer-service-1.0-SNAPSHOT/api/api/customer/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8280",
+							"path": [
+								"customer-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"customer",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "place order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": \"681fbfb8df16446571943783\",  \r\n  \"items\": [\r\n    {\r\n      \"dishId\": \"682076eedaaf3c0a1781892d\",  \r\n      \"qty\": 1,\r\n      \"price\": 5.99\r\n    },\r\n    {\r\n      \"dishId\": \"682076eedaaf3c0a1781892d\",  \r\n      \"qty\": 1,\r\n      \"price\": 2.50\r\n    }\r\n  ],\r\n  \"status\": \"PENDING\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8280/customer-service-1.0-SNAPSHOT/api/api/customer/place-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8280",
+							"path": [
+								"customer-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"customer",
+								"place-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list all customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8280/customer-service-1.0-SNAPSHOT/api/api/customer/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8280",
+							"path": [
+								"customer-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"customer",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8280/customer-service-1.0-SNAPSHOT/api/api/customer/get-balance?customerId=6824cb14158f513500f78250",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8280",
+							"path": [
+								"customer-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"customer",
+								"get-balance"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "6824cb14158f513500f78250"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reduce Customer Balance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8280/customer-service-1.0-SNAPSHOT/api/api/customer/reduce-balance?customerId=6824cb14158f513500f78250&amount=10 ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8280",
+							"path": [
+								"customer-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"customer",
+								"reduce-balance"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "6824cb14158f513500f78250"
+								},
+								{
+									"key": "amount",
+									"value": "10 "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8280/customer-service-1.0-SNAPSHOT/api/api/customer/orders/history?customerId=6824cb14158f513500f78250",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8280",
+							"path": [
+								"customer-service-1.0-SNAPSHOT",
+								"api",
+								"api",
+								"customer",
+								"orders",
+								"history"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "6824cb14158f513500f78250"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

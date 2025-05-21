@@ -1,0 +1,192 @@
+[{
+  "_id": {
+    "$oid": "6826054f32d35a1ebe7de435"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "682076eedaaf3c0a1781892d"
+      },
+      "qty": 1,
+      "price": 10.5
+    }
+  ],
+  "total": 10.5,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "6826056e32d35a1ebe7de436"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "682076eedaaf3c0a1781892d"
+      },
+      "qty": 1,
+      "price": 10.5
+    },
+    {
+      "dishId": {
+        "$oid": "681fb251810af740461ac043"
+      },
+      "qty": 1,
+      "price": 15
+    }
+  ],
+  "total": 25.5,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "682606caad2a5221186c6c93"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "68210ca6481d2149a41e5a29"
+      },
+      "qty": 1,
+      "price": 20
+    }
+  ],
+  "total": 20,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "6826077d27557d3a9218b8aa"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "6826077127557d3a9218b8a9"
+      },
+      "qty": 3,
+      "price": 20
+    }
+  ],
+  "total": 60,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "68260c525fecdc7f7ee2e0f8"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "6826077127557d3a9218b8a9"
+      },
+      "qty": 1,
+      "price": 20
+    }
+  ],
+  "total": 20,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "682614aa202777077edd89bc"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "682076eedaaf3c0a1781892d"
+      },
+      "qty": 1,
+      "price": 10.5
+    }
+  ],
+  "total": 10.5,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "682615e08ce7fc41c8562416"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "6826077127557d3a9218b8a9"
+      },
+      "qty": 1,
+      "price": 20
+    }
+  ],
+  "total": 20,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "68271e0936bd666367049cb1"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "68271dbc36bd666367049cb0"
+      },
+      "qty": 10,
+      "price": 99
+    },
+    {
+      "dishId": {
+        "$oid": "681fb180810af740461ac041"
+      },
+      "qty": 1,
+      "price": 15
+    }
+  ],
+  "total": 1005,
+  "status": "CONFIRMED"
+},
+{
+  "_id": {
+    "$oid": "68271e3436bd666367049cb2"
+  },
+  "customerId": {
+    "$oid": "6824cb14158f513500f78250"
+  },
+  "items": [
+    {
+      "dishId": {
+        "$oid": "681fb180810af740461ac041"
+      },
+      "qty": 1,
+      "price": 15
+    },
+    {
+      "dishId": {
+        "$oid": "68271dbc36bd666367049cb0"
+      },
+      "qty": 1,
+      "price": 99
+    }
+  ],
+  "total": 114,
+  "status": "CONFIRMED"
+}]

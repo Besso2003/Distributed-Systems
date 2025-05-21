@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "681faef0810af740461ac040"
+  },
+  "sellerId": {
+    "$oid": "681fad5a810af740461ac03f"
+  },
+  "name": "updated-seller2-dish",
+  "price": 15,
+  "quantity": 10
+},
+{
+  "_id": {
+    "$oid": "681fb180810af740461ac041"
+  },
+  "sellerId": {
+    "$oid": "681faef0810af740461ac040"
+  },
+  "name": "Spaghetti",
+  "price": 15,
+  "quantity": 8
+},
+{
+  "_id": {
+    "$oid": "681fb24f810af740461ac042"
+  },
+  "sellerId": {
+    "$oid": "681faef0810af740461ac040"
+  },
+  "name": "Spaghetti",
+  "price": 15,
+  "quantity": 10
+},
+{
+  "_id": {
+    "$oid": "681fb251810af740461ac043"
+  },
+  "sellerId": {
+    "$oid": "681faef0810af740461ac040"
+  },
+  "name": "Spaghetti",
+  "price": 15,
+  "quantity": 10
+},
+{
+  "_id": {
+    "$oid": "682076eedaaf3c0a1781892d"
+  },
+  "sellerId": {
+    "$oid": "681faef0810af740461ac040"
+  },
+  "name": "Dish1",
+  "price": 10.5,
+  "quantity": 9
+},
+{
+  "_id": {
+    "$oid": "6826077127557d3a9218b8a9"
+  },
+  "sellerId": {
+    "$oid": "681fad5a810af740461ac03f"
+  },
+  "name": "sellerABCD-dish2",
+  "price": 20,
+  "quantity": 0
+},
+{
+  "_id": {
+    "$oid": "68271dbc36bd666367049cb0"
+  },
+  "sellerId": {
+    "$oid": "681fad5a810af740461ac03f"
+  },
+  "name": "abcd-dish",
+  "price": 99,
+  "quantity": 89
+}]

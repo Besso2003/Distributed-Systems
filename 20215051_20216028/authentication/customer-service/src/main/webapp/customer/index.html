@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style> .hide { display: none } </style>
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <!-- Registration -->
+    <div id="registerCard" class="card shadow-sm mx-auto mb-4" style="max-width:25rem">
+        <div class="card-header fw-bold">Customer Registration</div>
+        <div class="card-body">
+            <form id="registerForm" class="vstack gap-3">
+                <input id="regUsername" class="form-control" placeholder="Username" required>
+                <input id="regEmail" class="form-control" type="email" placeholder="Email" required>
+                <input id="regPassword" class="form-control" type="password" placeholder="Password" required>
+                <button class="btn btn-success">Register</button>
+            </form>
+            <div id="registerAlert" class="alert mt-3 hide"></div>
+        </div>
+    </div>
+
+    <!-- Login -->
+    <div id="loginCard" class="card shadow-sm mx-auto mb-4" style="max-width:25rem">
+        <div class="card-header fw-bold">Customer Login</div>
+        <div class="card-body">
+            <form id="loginForm" class="vstack gap-3">
+                <input id="loginUser" class="form-control" placeholder="Username" required>
+                <input id="loginPass" type="password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-primary">Login</button>
+            </form>
+            <div id="loginAlert" class="alert mt-3 hide"></div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dash" class="hide">
+
+        <nav class="navbar navbar-dark bg-primary mb-4">
+            <div class="container-fluid">
+                <span class="navbar-brand">Welcome, <span id="custName"></span></span>
+                <button id="btnLogout" class="btn btn-sm btn-light">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Place Order -->
+        <!-- ‑‑‑ Place Order ‑‑‑ -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">Place New Order</div>
+            <div class="card-body">
+
+                <!-- build‑an‑item row -->
+                <div class="row g-2 mb-3 align-items-end">
+                    <div class="col-6">
+                        <label class="form-label">Dish</label>
+                        <select id="dishSelect" class="form-select" required></select>
+                    </div>
+
+                    <div class="col-3">
+                        <label class="form-label">Qty</label>
+                        <input id="dishQty" type="number" min="1" value="1" class="form-control" required>
+                    </div>
+
+                    <div class="col-3 d-grid">
+                        <button id="btnAddItem" class="btn btn-secondary mt-4">Add Item</button>
+                    </div>
+                </div>
+
+                <!-- order preview -->
+                <table class="table table-sm mb-3">
+                    <thead class="table-light">
+                    <tr><th>Name</th><th>Qty</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="orderItemsTbody">
+                    <tr><td colspan="3" class="text-muted">No items yet</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- final submit -->
+                <div class="d-grid">
+                    <button id="btnSubmitOrder" class="btn btn-success">Submit Order</button>
+                </div>
+                <div id="orderAlert" class="alert mt-3 hide"></div>
+            </div>
+        </div>
+
+
+        <!-- List Dishes -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold d-flex justify-content-between">
+                <span>Available Dishes</span>
+                <button id="btnRefreshDishes" class="btn btn-sm btn-outline-primary">Refresh</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="table-light">
+                        <tr>
+                            <th>Dish ID</th>
+                            <th>Name</th>
+                            <th>Price (£)</th>
+                            <th>Qty</th>
+                            <th>Seller ID</th>
+                        </tr>
+                        </thead>
+                        <tbody id="dishesTbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order History -->
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold d-flex justify-content-between">
+                <span>Your Orders</span>
+                <button id="btnRefreshOrders" class="btn btn-sm btn-outline-primary">Refresh</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Order ID</th>
+<!--                        <th>Status</th>-->
+<!--                        <th>Total</th>-->
+                    </tr></thead>
+                    <tbody id="orderTbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const BASE = 'http://localhost:8280/customer-service-1.0-SNAPSHOT/api/api/customer';
+    const SELLER_BASE   = 'http://localhost:8180/seller-service-1.0-SNAPSHOT/api/api/seller';
+
+    const STORE = localStorage;
+    const $ = id => document.getElementById(id);
+    const alertBox = (el, msg, ok = true) => {
+        el.className = 'alert mt-3 ' + (ok ? 'alert-success' : 'alert-danger');
+        el.textContent = msg;
+        el.classList.remove('hide');
+    }
+
+    function showDash() {
+        $('custName').textContent = STORE.getItem('customerName');
+        $('registerCard').classList.add('hide');
+        $('loginCard').classList.add('hide');
+        $('dash').classList.remove('hide');
+        loadOrders();
+    }
+
+    if (STORE.getItem('customerId')) showDash();
+
+    $('btnLogout').onclick = () => {
+        STORE.clear();
+        location.reload();
+    }
+
+    $('registerForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const body = {
+            username: $('regUsername').value.trim(),
+            email: $('regEmail').value.trim(),
+            password: $('regPassword').value
+        };
+        const res = await fetch(`${BASE}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        alertBox($('registerAlert'), res.ok ? 'Registered!' : await res.text(), res.ok);
+        if (res.ok) $('registerForm').reset();
+    });
+
+    $('loginForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const body = {
+            username: $('loginUser').value.trim(),
+            password: $('loginPass').value
+        };
+        const res = await fetch(`${BASE}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        if (!res.ok) return alertBox($('loginAlert'), 'Invalid credentials', false);
+        const data = await res.json();
+        STORE.setItem('customerId', data.id);
+        STORE.setItem('customerName', data.username);
+        showDash();
+    });
+
+
+    async function loadOrders() {
+        const tbody = $('orderTbody');
+        tbody.innerHTML = '<tr><td>Loading…</td></tr>';
+        const res = await fetch(`${BASE}/orders/history?customerId=${STORE.getItem('customerId')}`);
+        const data = await res.json();
+
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td>No orders yet.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = '';
+        data.forEach(o => {
+            tbody.insertAdjacentHTML('beforeend', `
+            <tr>
+                <td>${o.id}</td>
+            </tr>
+        `);
+        });
+    }
+
+
+    $('btnRefreshOrders').onclick = loadOrders;
+
+
+    // place order
+    let orderItems = [];   // [{ dishId, name, qty }]
+
+    function refreshOrderPreview() {
+        const t = $('orderItemsTbody');
+        if (!orderItems.length) {
+            t.innerHTML = '<tr><td colspan="3" class="text-muted">No items yet</td></tr>';
+            return;
+        }
+        t.innerHTML = '';
+        orderItems.forEach((it, idx) => {
+            t.insertAdjacentHTML('beforeend', `
+            <tr>
+                <td>${it.name}</td>
+                <td>${it.qty}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-danger"
+                            onclick="removeOrderItem(${idx})">✕</button>
+                </td>
+            </tr>`);
+        });
+    }
+    function removeOrderItem(i) {
+        orderItems.splice(i, 1);
+        refreshOrderPreview();
+    }
+    /* ---------- ADD‑ITEM ---------- */
+    $('btnAddItem').onclick = () => {
+        const sel = $('dishSelect');
+        if (!sel.value) return;
+
+        const selectedDish = sel.selectedOptions[0];
+        const dishPrice = parseFloat(selectedDish.getAttribute('data-price')); // Use getAttribute to fetch data-price
+        const qty = parseInt($('dishQty').value, 10) || 1;
+
+        orderItems.push({
+            dishId: sel.value,
+            name: selectedDish.textContent,
+            qty: qty,
+            price: dishPrice // Set price correctly
+        });
+        console.log('Added Item:', selectedDish.textContent, 'Price:', dishPrice, 'Qty:', qty); // Debugging output
+        refreshOrderPreview();
+        $('dishQty').value = 1;
+    };
+
+    /* ---------- SUBMIT‑ORDER ---------- */
+    $('btnSubmitOrder').onclick = async () => {
+        if (!orderItems.length) {
+            return alertBox($('orderAlert'), 'Please add at least one item', false);
+        }
+        const total = orderItems.reduce((acc, item) => acc + (item.qty * item.price), 0);
+        console.log('Total Price:', total.toFixed(2)); // Debugging output to check total price calculation
+
+        const body = {
+            customerId: STORE.getItem('customerId'),
+            items: orderItems.map(i => ({
+                dishId: i.dishId,
+                qty: i.qty,
+                price: i.price  // Ensure price is included
+            })),
+            total: total  // Send the total along with the order
+        };
+
+        try {
+            const res = await fetch(`${BASE}/place-order`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            if (res.ok) {
+                alertBox($('orderAlert'), 'Order placed successfully');
+                orderItems = [];
+                refreshOrderPreview();
+                loadOrders();
+            } else {
+                const err = await res.text();
+                alertBox($('orderAlert'), err || 'Failed to place order', false);
+            }
+        } catch (e) {
+            alertBox($('orderAlert'), e.message, false);
+        }
+    };
+
+    /* ---------- LOAD DISHES &  fill the dropdown ---------- */
+    async function loadDishes () {
+        const tbody = $('dishesTbody');
+        const sel   = $('dishSelect');
+
+        /* show loading indicators */
+        tbody.innerHTML = '<tr><td colspan="5">Loading…</td></tr>';
+        sel.innerHTML   = '<option value="">Loading…</option>';
+
+        try {
+            const res = await fetch(`${SELLER_BASE}/dishes/all`);
+            if (!res.ok) throw new Error(`Server responded ${res.status}`);
+
+            const dishes = await res.json();
+
+            /* ── nothing came back ─────────────────────────── */
+            if (!dishes.length) {
+                tbody.innerHTML = '<tr><td colspan="5">No dishes available.</td></tr>';
+                sel.innerHTML   = '<option value="">No dishes available</option>';
+                return;
+            }
+
+            /* ── populate table + dropdown ─────────────────── */
+            tbody.innerHTML = '';                         // clear “Loading…”
+            sel.innerHTML   = '<option value="">-- choose a dish --</option>';
+
+            dishes.forEach(d => {
+                /* table */
+                tbody.insertAdjacentHTML('beforeend', `
+                <tr>
+                    <td>${d.id}</td>
+                    <td>${d.name}</td>
+                    <td>${d.price.toFixed(2)}</td>
+                    <td>${d.quantity}</td>
+                    <td>${d.sellerId}</td>
+                </tr>`);
+
+                /* dropdown */
+                sel.insertAdjacentHTML('beforeend',
+                    `
+<option value="${d.id}" data-price="${d.price}">${d.name} – £${d.price.toFixed(2)}</option>
+`);
+            });
+
+            /* ── errors ───────────────────────────────────────── */
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="5">Error: ${err.message}</td></tr>`;
+            sel.innerHTML   = '<option value="">Error loading dishes</option>';
+        }
+    }
+
+
+    $('btnRefreshDishes').onclick = loadDishes;
+
+    // Call the function to load dishes when the page loads or when needed
+    loadDishes();
+
+
+</script>
+</body>
+</html>
